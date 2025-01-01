@@ -1,5 +1,3 @@
-const { NotImplementedError } = require('../extensions/index.js');
-
 const { ListNode } = require('../extensions/list-node.js');
 
 /**
