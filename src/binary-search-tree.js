@@ -72,7 +72,7 @@ class BinarySearchTree {
       return null;
     }
     let curr = this.Root;
-    let parent = new Node;
+    let parent = null;
     while (1) {
       if (data == curr.data) { break; }
       if (data < curr.data) {
@@ -85,11 +85,14 @@ class BinarySearchTree {
       }
     }
     //no children
+    if (parent === null && !(curr.left) && !(curr.right)) { this.Root = null; return; } 
     if (!(curr.left) && !(curr.right)) { 
       if (parent.left == curr) { parent.left = null; return; }
       if (parent.right == curr) { parent.right = null; return; }
     }
     //one child
+    if (parent === null && curr.left && !(curr.right)) { this.Root = curr.left; return; }
+    if (parent === null && !(curr.left) && curr.right) { this.Root = curr.right; return; }
     if (curr.left && !(curr.right)) {
       if (parent.left == curr) { parent.left = curr.left; return; }
       if (parent.right == curr) { parent.right = curr.left; return; }
@@ -103,6 +106,7 @@ class BinarySearchTree {
       let tmp = new BinarySearchTree(curr.right);
       curr.data = tmp.min();
       tmp.remove(curr.data);
+      curr.right = tmp.Root;
     }
 
   }
